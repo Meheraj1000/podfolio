@@ -3,12 +3,12 @@ import Header from '../Header';
 
 const projects = [
   {
-    title: 'Electronic Notional',
-    description: 'An e-commerce website for buying electronic gadgets. Includes cart, wishlist, and secure login.',
-    tech: ['React', 'Tailwind CSS', 'Firebase', 'MongoDB'],
-    live: 'https://assignment-11-food-client.vercel.app/',
-    github: 'https://github.com/yourusername/electronic-notional'
-  },
+  title: 'Food Sharing',
+  description: 'An online restaurant website for browsing menus, ordering delicious food, and managing cart and favorites with secure login.',
+  tech: ['React', 'Tailwind CSS', 'Firebase', 'MongoDB'],
+   live: 'https://assignment-11-food-client.vercel.app/',
+  github: 'https://github.com/yourusername/food-fiesta'
+},
   {
     title: 'Eco Adventure',
     description: 'Blog platform for eco-friendly travel experiences. Includes user login, adventure pages, and profile.',
@@ -20,7 +20,7 @@ const projects = [
     title: 'Portfolio Website',
     description: 'Personal portfolio to showcase skills and projects using React, animations, and responsive design.',
     tech: ['React', 'Framer Motion', 'Tailwind CSS'],
-    live: 'https://yourportfolio.netlify.app',
+    live: 'https://meheraj-portfolio.vercel.app/',
     github: 'https://github.com/yourusername/portfolio'
   }
 ];
@@ -41,7 +41,7 @@ const Project = () => {
                 <span className="text-sm font-medium text-gray-500">Tech:</span>
                 <ul className="flex flex-wrap gap-2 mt-1">
                   {project.tech.map((tech, index) => (
-                    <li key={index} className="text-xs px-2 py-1 bg-gray-100 rounded-full">
+                    <li key={index} className="text-xs px-1 py-1 text-black font-bold bg-gray-100 rounded-full">
                       {tech}
                     </li>
                   ))}

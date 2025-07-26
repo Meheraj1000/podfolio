@@ -1,6 +1,8 @@
 import React from 'react';
 import { FaLaptopCode, FaRocket, FaTrophy } from 'react-icons/fa';
 import Header from '../Header';
+import profilePic from '../assets/IMG_3836.JPG';
+import resumePDF from '../assets/MD Meherajul Karim1.pdf';
 
 const About = () => {
   return (
@@ -18,7 +20,7 @@ const About = () => {
           {/* ✅ Profile Card */}
           <div className="w-full lg:w-1/3 bg-gradient-to-br from-white to-purple-50 rounded-2xl shadow-lg p-6 text-center hover:shadow-2xl transition duration-300 ease-in-out">
             <img
-              src="/src/assets/IMG_3836.JPG"
+              src={profilePic}
               alt="Meherajul Karim"
               className="w-40 h-40 mx-auto rounded-full object-cover border-4 border-purple-400 shadow-lg hover:scale-105 transition duration-300"
             />
@@ -37,7 +39,7 @@ const About = () => {
 
             <div className="mt-6">
               <a
-                href="/src/assets/MD Meherajul Karim1.pdf"
+                href={resumePDF}
                 target="_blank"
                 className="inline-block px-4 py-2 bg-purple-600 text-white rounded-full text-sm hover:bg-purple-700 transition"
               >

@@ -10,18 +10,39 @@ import Footer from './Footer';
 const App = () => {
   return (
     <>
-    <header>
-      <Header></Header>
-    </header>
-     <main className="pt-16"> {/* pt-16 offsets the fixed navbar height */}
-        <Banner />
-        <About />
-        <Skill></Skill>
-        <Project></Project>
-        <Contact></Contact>
+      <header>
+        <Header />
+      </header>
+
+      <main className="pt-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-20">
+        {/* Banner */}
+        <section>
+          <Banner />
+        </section>
+
+        {/* About */}
+        <section id="about">
+          <About />
+        </section>
+
+        {/* Skills */}
+        <section id="skills">
+          <Skill />
+        </section>
+
+        {/* Projects */}
+        <section id="projects">
+          <Project />
+        </section>
+
+        {/* Contact */}
+        <section id="contact">
+          <Contact />
+        </section>
       </main>
+
       <footer>
-        <Footer></Footer>
+        <Footer />
       </footer>
     </>
   );
