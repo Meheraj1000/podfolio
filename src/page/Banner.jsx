@@ -1,8 +1,22 @@
 import React from 'react';
-import myPhoto from '../assets/IMG_3836.JPG';
 import resumePDF from '../assets/MD Meherajul Karim1.pdf';
 import { TypeAnimation } from 'react-type-animation';
 import { site } from '../site';
+
+const offers = [
+  {
+    title: 'Web products',
+    text: 'React screens, login, and the data behind them, ready to hand to someone else.',
+  },
+  {
+    title: 'Mobile',
+    text: 'React Native and Android, with the same care for layout as the web work.',
+  },
+  {
+    title: 'AI features',
+    text: 'An API or assistant inside a product, not a demo sitting off to the side.',
+  },
+];
 
 const Banner = () => {
   return (
@@ -45,15 +59,25 @@ const Banner = () => {
           </div>
         </div>
 
-        <div className="hero-frame">
-          <div className="hero-portrait">
-            <img src={myPhoto} alt="MD Meherajul Karim" />
+        <aside className="offer-card">
+          <p className="offer-status"><span>Available</span> Remote from Dhaka</p>
+          <h2>Tell me the product. I’ll build the part people actually use.</h2>
+          <ol>
+            {offers.map((offer, index) => (
+              <li key={offer.title}>
+                <span>0{index + 1}</span>
+                <div>
+                  <strong>{offer.title}</strong>
+                  <p>{offer.text}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+          <div className="offer-foot">
+            <p>A short note is enough: the product, the timeline, and what done looks like.</p>
+            <a className="action action-solid" href="#contact">Start with a note</a>
           </div>
-          <div className="portrait-note">
-            <strong>Available</strong>
-            <span>Remote · Dhaka</span>
-          </div>
-        </div>
+        </aside>
       </div>
     </section>
   );

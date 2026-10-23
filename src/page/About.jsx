@@ -1,5 +1,5 @@
 import React from 'react';
-import profilePic from '../assets/IMG_3836.JPG';
+import profilePic from '../assets/MEHERAJ.jpg';
 import Header from '../Header';
 
 const stats = [
