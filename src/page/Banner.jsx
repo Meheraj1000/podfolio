@@ -1,94 +1,61 @@
 import React from 'react';
 import myPhoto from '../assets/IMG_3836.JPG';
-import { FaGithub, FaLinkedin } from 'react-icons/fa';
-import { motion } from 'framer-motion';
+import resumePDF from '../assets/MD Meherajul Karim1.pdf';
+import { TypeAnimation } from 'react-type-animation';
+import { site } from '../site';
 
 const Banner = () => {
   return (
-    <div className="hero min-h-screen bg-base-200 px-4 sm:px-6 md:px-10 py-10">
-      <div className="hero-content flex flex-col-reverse lg:flex-row-reverse items-center gap-10">
-        {/* Profile Image with animation */}
-        <motion.img
-          initial={{ opacity: 0, x: 100 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8 }}
-          src={myPhoto}
-          className="w-40 sm:w-60 md:w-72 lg:max-w-sm rounded-2xl shadow-2xl hover:scale-105 transition duration-300"
-          alt="Profile"
-        />
-
-        {/* Text section with animation */}
-        <motion.div
-          initial={{ opacity: 0, y: -50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-center lg:text-left"
-        >
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-primary">
-            Hi, I'm Meheraj
-          </h1>
-
-          <p className="text-base sm:text-lg italic text-secondary mt-1">
-            Turning ideas into interactive web experiences.
+    <section id="home" className="hero">
+      <div className="wrap hero-grid">
+        <div className="hero-copy">
+          <p className="eyebrow">Dhaka · open to remote work</p>
+          <h1>Meheraj</h1>
+          <p className="hero-line">
+            <span>I build</span>
+            <TypeAnimation
+              sequence={[
+                'web products.',
+                1800,
+                'mobile apps.',
+                1800,
+                'AI-backed tools.',
+                1800,
+              ]}
+              wrapper="strong"
+              speed={45}
+              repeat={Infinity}
+              cursor={false}
+            />
           </p>
-
-          <h2 className="text-lg sm:text-xl mt-2 text-secondary">
-            React Developer | Problem Solver
-          </h2>
-
-          <p className="py-6 max-w-xl mx-auto lg:mx-0 text-sm sm:text-base">
-            I'm a frontend-focused web developer with expertise in creating responsive and interactive user interfaces using technologies like React.js, Next.js, Tailwind CSS, HTML5, CSS3, and Bootstrap.
-            <br /><br />
-            On the backend, I work with tools like MongoDB and Firebase to handle data storage, user authentication, and real-time updates. My goal is to build full-stack applications that are not only functional but also optimized and scalable.
+          <p className="hero-body">
+            Software developer in Dhaka. I build web and mobile products with React,
+            Node, Firebase, and the AI tools I am working with now.
           </p>
-
-          {/* Resume & Hire Me buttons */}
-          <div className="flex flex-wrap justify-center lg:justify-start gap-4 mb-4">
-            <a
-              href="/src/assets/Meherajul_Karim_Resume.pdf" // ✅ Ensure file is renamed & exists
-              download
-              className="btn btn-primary"
-              aria-label="Download Resume"
-            >
-              Download Resume
+          <div className="hero-actions">
+            <a className="action action-solid" href={resumePDF} target="_blank" rel="noreferrer">
+              Resume
             </a>
-            <a href="#contact" className="btn btn-outline btn-secondary">
-              Hire Me
+            <a className="action action-ghost" href="#contact">
+              Contact
+            </a>
+            <a className="text-link" href={site.github} target="_blank" rel="noreferrer">
+              GitHub
             </a>
           </div>
+        </div>
 
-          {/* Social Icons */}
-          <div className="flex justify-center lg:justify-start gap-4 text-2xl mb-4">
-            <a
-              href="https://github.com/meherajdev"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-primary transition"
-            >
-              <FaGithub />
-            </a>
-            <a
-              href="https://linkedin.com/in/meheraj-karim"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-primary transition"
-            >
-              <FaLinkedin />
-            </a>
+        <div className="hero-frame">
+          <div className="hero-portrait">
+            <img src={myPhoto} alt="MD Meherajul Karim" />
           </div>
-
-          {/* Location/Status */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 1.2, duration: 0.6 }}
-            className="mt-2 text-sm italic text-gray-500"
-          >
-            📍 Based in Dhaka, Bangladesh | Available for remote work
-          </motion.div>
-        </motion.div>
+          <div className="portrait-note">
+            <strong>Available</strong>
+            <span>Remote · Dhaka</span>
+          </div>
+        </div>
       </div>
-    </div>
+    </section>
   );
 };
 

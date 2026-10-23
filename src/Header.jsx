@@ -1,60 +1,107 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import Logo from './assets/download (1).jpeg';
-import resumePDF from './assets/MD Meherajul Karim1.pdf';
-const Header = () => {
-  const links = (
-  <>
-  <li><Link to="/" className="text-black font-bold">Home</Link></li>
-  <li><Link to="/about" className="text-black font-bold">About</Link></li>
-  <li><Link to="/skill" className="text-black font-bold">Skills</Link></li>
-  <li><Link to="/project" className="text-black font-bold">Projects</Link></li>
-  <li><Link to="/contact" className="text-black font-bold">Contact</Link></li>
-</>
+import React, { useEffect, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { FiMenu, FiX } from 'react-icons/fi';
 
+const navItems = [
+  { id: 'home', label: 'Home', hash: '#home', to: '/' },
+  { id: 'about', label: 'About', hash: '#about', to: '/about' },
+  { id: 'skills', label: 'Skills', hash: '#skills', to: '/skill' },
+  { id: 'projects', label: 'Projects', hash: '#projects', to: '/project' },
+];
+
+const routeToSection = {
+  '/': 'home',
+  '/about': 'about',
+  '/skill': 'skills',
+  '/project': 'projects',
+  '/contact': 'contact',
+};
+
+const Header = () => {
+  const { pathname } = useLocation();
+  const isHomePage = pathname === '/';
+  const [active, setActive] = useState(routeToSection[pathname] || 'home');
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    if (!isHomePage) {
+      setActive(routeToSection[pathname] || 'home');
+      return undefined;
+    }
+
+    const onScroll = () => {
+      let current = 'home';
+      [...navItems, { id: 'contact' }].forEach((item) => {
+        const section = document.getElementById(item.id);
+        if (section && section.getBoundingClientRect().top <= 140) {
+          current = item.id;
+        }
+      });
+      setActive(current);
+    };
+
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, [isHomePage, pathname]);
+
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
+
+  const itemClass = (id) => `nav-link${active === id ? ' is-active' : ''}`;
+
+  const links = navItems.map((item) => (
+    isHomePage ? (
+      <a key={item.id} href={item.hash} className={itemClass(item.id)} onClick={() => setOpen(false)}>
+        {item.label}
+      </a>
+    ) : (
+      <Link key={item.id} to={item.to} className={itemClass(item.id)} onClick={() => setOpen(false)}>
+        {item.label}
+      </Link>
+    )
+  ));
+
+  const contact = isHomePage ? (
+    <a href="#contact" className={`nav-cta${active === 'contact' ? ' is-active' : ''}`} onClick={() => setOpen(false)}>
+      Contact
+    </a>
+  ) : (
+    <Link to="/contact" className={`nav-cta${active === 'contact' ? ' is-active' : ''}`} onClick={() => setOpen(false)}>
+      Contact
+    </Link>
   );
 
   return (
-    <div className="navbar fixed top-0 left-0 w-full z-50 bg-white shadow-md">
-      <div className="navbar-start">
-        {/* Mobile Dropdown */}
-        <div className="dropdown">
-          <div tabIndex={0} role="button" className="btn  text-black font-bold btn-ghost lg:hidden">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none"
-              viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
-                d="M4 6h16M4 12h8m-8 6h16" />
-            </svg>
-          </div>
-          <ul tabIndex={0}
-            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-white rounded-box w-52">
-            {links}
-          </ul>
-        </div>
-        {/* Logo */}
-        <Link to="/" className="btn btn-ghost text-xl">
-          <img src={Logo} alt="Logo" className="w-10 h-10 rounded-full" />
-        </Link>
-      </div>
+    <header className="nav">
+      <Link to="/" className="wordmark" aria-label="Go to home">
+        <span>M</span>
+        Meheraj
+      </Link>
 
-      {/* Desktop Nav */}
-      <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">
+      <nav className="nav-desktop" aria-label="Primary">
+        {links}
+        {contact}
+      </nav>
+
+      <button
+        type="button"
+        className="nav-toggle"
+        aria-label={open ? 'Close menu' : 'Open menu'}
+        aria-expanded={open}
+        onClick={() => setOpen((value) => !value)}
+      >
+        {open ? <FiX /> : <FiMenu />}
+      </button>
+
+      {open && (
+        <div className="nav-drawer">
           {links}
-        </ul>
-      </div>
-
-      {/* Resume Button */}
-      <div className="navbar-end">
-        <a
-          href={resumePDF}
-          target="_blank"
-          className="btn btn-outline text-black font-bold btn-sm"
-        >
-          Resume
-        </a>
-      </div>
-    </div>
+          {contact}
+        </div>
+      )}
+    </header>
   );
 };
 

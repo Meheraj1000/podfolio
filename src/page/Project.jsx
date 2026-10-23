@@ -1,72 +1,110 @@
 import React from 'react';
+import { FaBus, FaHome, FaLeaf, FaLaptopCode, FaUtensils } from 'react-icons/fa';
 import Header from '../Header';
+import { site } from '../site';
 
 const projects = [
   {
-  title: 'Food Sharing',
-  description: 'An online restaurant website for browsing menus, ordering delicious food, and managing cart and favorites with secure login.',
-  tech: ['React', 'Tailwind CSS', 'Firebase', 'MongoDB'],
-   live: 'https://assignment-11-food-client.vercel.app/',
-  github: 'https://github.com/yourusername/food-fiesta'
-},
-  {
-    title: 'Eco Adventure',
-    description: 'Blog platform for eco-friendly travel experiences. Includes user login, adventure pages, and profile.',
-    tech: ['React', 'Firebase Auth', 'Tailwind', 'JSON Data'],
-    live: 'https://eco-adventure.netlify.app',
-    github: 'https://github.com/yourusername/eco-adventure'
+    title: 'Nirapad Transit',
+    category: 'Transport',
+    tone: 'transit',
+    icon: <FaBus />,
+    description: 'A final-year platform for public transport: role-based dashboards, a live map, and a GPS simulator. The data is a demo, not a government deployment.',
+    results: ['Seven-role login', 'Live map and alerts', 'Flutter passenger and driver apps'],
+    tech: ['Next.js', 'TypeScript', 'PostgreSQL', 'Flutter'],
+    github: 'https://github.com/Meheraj1000/BTRC',
   },
   {
-    title: 'Portfolio Website',
-    description: 'Personal portfolio to showcase skills and projects using React, animations, and responsive design.',
-    tech: ['React', 'Framer Motion', 'Tailwind CSS'],
-    live: 'https://meheraj-portfolio.vercel.app/',
-    github: 'https://github.com/yourusername/portfolio'
-  }
+    title: 'LifeOS',
+    category: 'Product',
+    tone: 'life',
+    icon: <FaHome />,
+    description: 'A home for documents, bills, family tasks, and an in-app assistant, shaped around services people use in Bangladesh.',
+    results: ['Document vault', 'Bills and budgets', 'Assistant chat'],
+    tech: ['Next.js', 'Prisma', 'PostgreSQL', 'Tailwind'],
+    github: 'https://github.com/Meheraj1000/LifeOS',
+  },
+  {
+    title: 'Food Sharing',
+    category: 'Product',
+    tone: 'food',
+    icon: <FaUtensils />,
+    description: 'A restaurant site for browsing menus, ordering food, and keeping a cart and favorites behind login.',
+    results: ['Menu, cart, and favorites', 'Secure login', 'Live on Vercel'],
+    tech: ['React', 'Tailwind', 'Firebase', 'MongoDB'],
+    live: 'https://assignment-11-food-client.vercel.app/',
+    github: 'https://github.com/Meheraj1000/Assignment-11-client',
+  },
+  {
+    title: 'Eco Adventure',
+    category: 'Travel',
+    tone: 'eco',
+    icon: <FaLeaf />,
+    description: 'A journal for eco-friendly trips, with accounts, adventure pages, and a profile.',
+    results: ['Adventure pages', 'User login and profile', 'Live on Netlify'],
+    tech: ['React', 'Firebase', 'Tailwind'],
+    live: 'https://eco-adventure.netlify.app',
+    github: 'https://github.com/Meheraj1000/Travel-website',
+  },
+  {
+    title: 'Portfolio',
+    category: 'Identity',
+    tone: 'folio',
+    icon: <FaLaptopCode />,
+    description: 'This site. A place to show the work, the stack, and a direct way to start a conversation.',
+    results: ['Responsive layout', 'Working contact form', 'Live portfolio'],
+    tech: ['React', 'Tailwind', 'Motion'],
+    live: site.portfolio,
+    github: 'https://github.com/Meheraj1000/podfolio',
+  },
 ];
 
-const Project = () => {
+const Project = ({ showHeader = true }) => {
   return (
     <>
-      <Header />
-      <section id="projects" className="max-w-6xl mx-auto px-6 py-16">
-        <h2 className="text-4xl font-bold text-center mb-12 text-gray-800">My Projects</h2>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project, idx) => (
-            <div key={idx} className="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition">
-              <h3 className="text-2xl font-semibold mb-2 text-blue-600">{project.title}</h3>
-              <p className="text-gray-700 mb-4">{project.description}</p>
-              <div className="mb-4">
-                <span className="text-sm font-medium text-gray-500">Tech:</span>
-                <ul className="flex flex-wrap gap-2 mt-1">
-                  {project.tech.map((tech, index) => (
-                    <li key={index} className="text-xs px-1 py-1 text-black font-bold bg-gray-100 rounded-full">
-                      {tech}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="flex justify-between mt-4">
-                <a
-                  href={project.live}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm text-blue-500 hover:underline"
-                >
-                  Live Demo
-                </a>
-                <a
-                  href={project.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm text-gray-600 hover:underline"
-                >
-                  GitHub
-                </a>
-              </div>
+      {showHeader && <Header />}
+      <section id="projects" className={`band${showHeader ? ' with-nav-offset' : ''}`}>
+        <div className="wrap">
+          <div className="section-head">
+            <div>
+              <p className="eyebrow">Selected work</p>
+              <h2>Builds you can open.</h2>
             </div>
-          ))}
+            <p className="lede">The two newest are on GitHub. Food Sharing, Eco Adventure, and this site are already on the web.</p>
+          </div>
+
+          <div className="work-grid">
+            {projects.map((project, index) => (
+              <article key={project.title} className={`work-card tone-${project.tone}`}>
+                <div className="work-main">
+                  <div className="work-title">
+                    <i aria-hidden="true">{project.icon}</i>
+                    <div>
+                      <p className="project-category">{String(index + 1).padStart(2, '0')} · {project.category}</p>
+                      <h3>{project.title}</h3>
+                    </div>
+                  </div>
+                  <p>{project.description}</p>
+                  <ul className="result-list">
+                    {project.results.map((result) => (
+                      <li key={result}>{result}</li>
+                    ))}
+                  </ul>
+                  <div className="tech-row">
+                    {project.tech.map((item) => (
+                      <span key={item}>{item}</span>
+                    ))}
+                  </div>
+                </div>
+                <div className="project-links">
+                  {project.live && (
+                    <a className="action action-solid" href={project.live} target="_blank" rel="noreferrer">Live</a>
+                  )}
+                  <a className="action action-ghost" href={project.github} target="_blank" rel="noreferrer">GitHub</a>
+                </div>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
     </>
